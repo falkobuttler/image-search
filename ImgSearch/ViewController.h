@@ -11,6 +11,5 @@
 @interface ViewController : UIViewController
 - (IBAction)didSearch:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UILabel *mainLabel;
-@property (strong, nonatomic) NSDictionary *results;
 
 @end
