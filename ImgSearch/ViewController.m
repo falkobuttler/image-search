@@ -8,11 +8,12 @@
 
 #import "ImageCell.h"
 #import "ViewController.h"
+#import "MNMBottomPullToRefreshManager.h"
 #import "UIImage+Decompression.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <NHBalancedFlowLayout/NHBalancedFlowLayout.h>
 
-@interface ViewController () <UICollectionViewDelegateFlowLayout, NHBalancedFlowLayoutDelegate>
+@interface ViewController () <UICollectionViewDelegateFlowLayout, NHBalancedFlowLayoutDelegate, MNMBottomPullToRefreshManagerClient>
 
 @property (weak, nonatomic) IBOutlet UITextField *searchTermTextField;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
@@ -21,6 +22,7 @@
 @property (strong, nonatomic) NSMutableArray *images;
 @property (strong, nonatomic) NSNumber* nextStartIndex;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) MNMBottomPullToRefreshManager *bottomRefreshManager;
 
 @end
 
@@ -29,12 +31,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    _refreshControl = [[UIRefreshControl alloc] init];
-    _refreshControl.tintColor = [UIColor colorWithRed:0.000 green:0.000 blue:0.584 alpha:1.000];
-    [_refreshControl addTarget:self action:@selector(loadNextPage:) forControlEvents:UIControlEventValueChanged];
-    [_collectionView addSubview:_refreshControl];
-    _collectionView.alwaysBounceVertical = YES;
+        
+    _bottomRefreshManager = [[MNMBottomPullToRefreshManager alloc] initWithPullToRefreshViewHeight:60
+                                                                                    collectionView:_collectionView
+                                                                                        withClient:self];
+    [_bottomRefreshManager setLoadingIndicatorStyle:UIActivityIndicatorViewStyleGray];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,7 +44,6 @@
 }
 
 - (IBAction)didSearch:(UIButton *)sender {
-    _refreshControl.enabled = YES;
     _images = [NSMutableArray array];
     [_collectionView reloadData];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -56,7 +56,7 @@
 
 - (void)loadNextPage:(id)sender
 {
-    [_refreshControl endRefreshing];
+    [_bottomRefreshManager collectionViewReloadFinished];
     [self loadPageFromIndex:_nextStartIndex];
 }
 
@@ -188,6 +188,26 @@ preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
     });
     
     return cell;
+}
+
+#pragma mark -
+#pragma mark MNMBottomPullToRefreshManagerClient
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_bottomRefreshManager collectionViewScrolled];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [_bottomRefreshManager collectionViewReleased];
+}
+
+- (void)bottomPullToRefreshTriggered:(MNMBottomPullToRefreshManager *)manager {
+    
+}
+
+- (void)MNMBottomPullToRefreshManagerClientReloadCollectionView{
+    
+    [self performSelector:@selector(loadNextPage:) withObject:_bottomRefreshManager afterDelay:1];
 }
 
 @end
