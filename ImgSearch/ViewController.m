@@ -10,7 +10,6 @@
 #import "ViewController.h"
 #import "MNMBottomPullToRefreshManager.h"
 #import "UIImage+Decompression.h"
-#import <SVProgressHUD/SVProgressHUD.h>
 #import <NHBalancedFlowLayout/NHBalancedFlowLayout.h>
 
 @interface ViewController () <UICollectionViewDelegateFlowLayout, NHBalancedFlowLayoutDelegate, MNMBottomPullToRefreshManagerClient>
@@ -20,8 +19,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *results;
 @property (strong, nonatomic) NSMutableArray *images;
-@property (strong, nonatomic) NSNumber* nextStartIndex;
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSNumber *nextStartIndex;
+@property (strong, nonatomic) NSOperationQueue *queue;
 @property (strong, nonatomic) MNMBottomPullToRefreshManager *bottomRefreshManager;
 
 @end
@@ -31,11 +30,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
     _bottomRefreshManager = [[MNMBottomPullToRefreshManager alloc] initWithPullToRefreshViewHeight:60
                                                                                     collectionView:_collectionView
                                                                                         withClient:self];
     [_bottomRefreshManager setLoadingIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _queue = [[NSOperationQueue alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,10 +44,10 @@
 }
 
 - (IBAction)didSearch:(UIButton *)sender {
+    [_queue cancelAllOperations];
+    [_queue waitUntilAllOperationsAreFinished];
     _images = [NSMutableArray array];
-    [_collectionView reloadData];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-//    [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeBlack];
     _errorLabel.text = @""; // clear any previous errors
     [_searchTermTextField resignFirstResponder]; // hide keyboard
 
@@ -71,7 +71,7 @@
     
     //Make an asynchronous request for the data
     [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:queryString]]
-                                       queue:[[NSOperationQueue alloc] init]
+                                       queue:_queue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
          if (error) {
@@ -91,7 +91,6 @@
                  int currentPageIndex = [cursor[@"currentPageIndex"] intValue];
                  if ( pages.count <= currentPageIndex+1 ) {
                      // Reached end - API only allows to query up to 64 results (8 pages with 8 results each)
-                     _refreshControl.enabled = NO;
                      return;
                  }
                  _nextStartIndex = pages[currentPageIndex+1][@"start"];
@@ -102,6 +101,8 @@
                  else {
                      // Load all images for this page
                      for( NSDictionary* imageDict in _results ) {
+                         // NOTE: This is loading the high-res version of the image
+                         // One could also use "tbUrl" but it is very low-res
                          NSString *image = imageDict[@"url"];
                          [self getImage:image];
                      }
@@ -114,23 +115,29 @@
 -(void) getImage:(NSString *)url
 {
     [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]]
-                                       queue:[[NSOperationQueue alloc] init]
+                                       queue:_queue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
          if(error){
              _errorLabel.text = @"Error retrieving image";
          }else{
              dispatch_async(dispatch_get_main_queue(), ^{
-//                 [SVProgressHUD dismiss];
                  UIImage *img = [[UIImage alloc] initWithData:data];
                  if ( img ) {
-                     @synchronized(self) { // Only one thread at a time
+                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                          [_images addObject:img];
-                         [_collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:_images.count-1 inSection:0]]];
+                         // WORKAROUND: Apparently UICollectionView has a bug sometimes causing a crash when
+                         // inserting the very first cell, see http://openradar.appspot.com/12954582
+                         if ( _images.count == 1 ) {
+                             [_collectionView reloadData];
+                         }
+                         else {
+                             [_collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:_images.count-1 inSection:0]]];
+                         }
                          if ( _results.count == _images.count ) {
                              [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                          }
-                     }
+                     }];
                  }
              });
          }
@@ -163,7 +170,7 @@ preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-    return [_images count];
+    return _images.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
