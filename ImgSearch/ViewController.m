@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface ViewController ()
 
@@ -30,6 +31,7 @@
 }
 
 - (IBAction)didSearch:(UIButton *)sender {
+    [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeBlack];
     _errorLabel.text = @""; // clear any previous errors
     _resultImageView.image = nil;
     [_searchTermTextField resignFirstResponder]; // hide keyboard
@@ -75,16 +77,26 @@
 {
     [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]]
                                        queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        if(error){
-            NSLog(@"Error retrieving image");
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"Setting Image");
-                UIImage *img = [[UIImage alloc] initWithData:data ];
-                _resultImageView.image = img;
-            });
-        }
-    }];
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error){
+             _errorLabel.text = @"Error retrieving image";
+         }else{
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [SVProgressHUD dismiss];
+                 UIImage *img = [[UIImage alloc] initWithData:data ];
+                 _resultImageView.image = img;
+             });
+         }
+     }];
 }
+
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self didSearch:nil];
+    return YES;
+}
+
 @end
