@@ -538,7 +538,7 @@ static const CGFloat kMinImageScale = 1.0f;
     _originalFrameRelativeToScreen = newFrame;
     
     self.view = [[UIView alloc] initWithFrame:windowBounds];
-    NSLog(@"WINDOW :%@",NSStringFromCGRect(windowBounds));
+//    NSLog(@"WINDOW :%@",NSStringFromCGRect(windowBounds));
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     // Add a Tableview
