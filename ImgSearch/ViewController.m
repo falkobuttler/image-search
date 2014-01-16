@@ -206,17 +206,6 @@ preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
 }
 
 #pragma mark -
-#pragma mark - UICollectionView delegate
-
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self, _images[indexPath.item]]
-//                                                                                         applicationActivities:nil];
-//    activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint];
-//    [self presentViewController:activityViewController animated:YES completion:^{}];
-//}
-
-#pragma mark -
 #pragma mark MHFacebookImageViewerDatasource
 
 - (NSInteger) numberImagesForImageViewer:(MHFacebookImageViewer *)imageViewer {

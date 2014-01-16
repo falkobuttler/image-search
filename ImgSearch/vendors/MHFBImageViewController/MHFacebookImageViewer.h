@@ -33,7 +33,6 @@ typedef void (^MHFacebookImageViewerClosingBlock)(void);
 @protocol MHFacebookImageViewerDatasource <NSObject>
 @required
 - (NSInteger) numberImagesForImageViewer:(MHFacebookImageViewer*) imageViewer;
-- (NSURL*) imageURLAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer*) imageViewer;
 - (UIImage*) imageDefaultAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer*) imageViewer;
 @end
 

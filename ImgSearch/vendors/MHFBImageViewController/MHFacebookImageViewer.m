@@ -47,6 +47,7 @@ static const CGFloat kMinImageScale = 1.0f;
 @property(nonatomic,weak) UIViewController * viewController;
 @property(nonatomic,weak) UIView * blackMask;
 @property(nonatomic,weak) UIButton * doneButton;
+@property(nonatomic,weak) UIButton * shareButton;
 @property(nonatomic,weak) UIImageView * senderView;
 @property(nonatomic,assign) NSInteger imageIndex;
 @property(nonatomic,weak) UIImage * defaultImage;
@@ -73,6 +74,7 @@ static const CGFloat kMinImageScale = 1.0f;
 @synthesize closingBlock = _closingBlock;
 @synthesize openingBlock = _openingBlock;
 @synthesize doneButton = _doneButton;
+@synthesize shareButton = _shareButton;
 @synthesize senderView = _senderView;
 @synthesize imageIndex = _imageIndex;
 @synthesize superView = _superView;
@@ -88,6 +90,9 @@ static const CGFloat kMinImageScale = 1.0f;
     [self addSubview:__scrollView];
     [_doneButton addTarget:self
                     action:@selector(close:)
+          forControlEvents:UIControlEventTouchUpInside];
+    [_shareButton addTarget:self
+                    action:@selector(share:)
           forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -361,11 +366,15 @@ static const CGFloat kMinImageScale = 1.0f;
             if(!_isDoneAnimating){
                 _isDoneAnimating = YES;
                 [self.viewController.view addSubview:_doneButton];
+                [self.viewController.view addSubview:_shareButton];
                 _doneButton.alpha = 0.0f;
+                _shareButton.alpha = 0.0f;
                 [UIView animateWithDuration:0.2f animations:^{
                     _doneButton.alpha = 1.0f;
+                    _shareButton.alpha = 1.0f;
                 } completion:^(BOOL finished) {
                     [self.viewController.view bringSubviewToFront:_doneButton];
+                    [self.viewController.view bringSubviewToFront:_shareButton];
                     _isDoneAnimating = NO;
                 }];
             }
@@ -401,11 +410,14 @@ static const CGFloat kMinImageScale = 1.0f;
         if(_doneButton.superview) {
             _isDoneAnimating = YES;
             _doneButton.alpha = 1.0f;
+            _shareButton.alpha = 1.0f;
             [UIView animateWithDuration:0.2f animations:^{
                 _doneButton.alpha = 0.0f;
+                _shareButton.alpha = 0.0f;
             } completion:^(BOOL finished) {
                 _isDoneAnimating = NO;
                 [_doneButton removeFromSuperview];
+                [_shareButton removeFromSuperview];
             }];
         }
     }
@@ -417,6 +429,13 @@ static const CGFloat kMinImageScale = 1.0f;
     [self dismissViewController];
 }
 
+- (void)share:(UIButton *)sender {
+    UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self, __imageView.image]
+                                                                                         applicationActivities:nil];
+    activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint];
+    [self.viewController presentViewController:activityViewController animated:YES completion:^{}];
+}
+
 @end
 
 @interface MHFacebookImageViewer()<UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>{
@@ -426,6 +445,7 @@ static const CGFloat kMinImageScale = 1.0f;
     UIView *_blackMask;
     UIImageView * _imageView;
     UIButton * _doneButton;
+    UIButton * _shareButton;
     UIView * _superView;
     
     CGPoint _panOrigin;
@@ -475,6 +495,7 @@ static const CGFloat kMinImageScale = 1.0f;
         imageViewerCell.superView = _senderView.superview;
         imageViewerCell.senderView = _senderView;
         imageViewerCell.doneButton = _doneButton;
+        imageViewerCell.shareButton = _shareButton;
         imageViewerCell.initialIndex = _initialIndex;
         imageViewerCell.statusBarStyle = _statusBarStyle;
         [imageViewerCell loadAllRequiredViews];
@@ -545,6 +566,11 @@ static const CGFloat kMinImageScale = 1.0f;
     [_doneButton setImageEdgeInsets:UIEdgeInsetsMake(-10, -10, -10, -10)];  // make click area bigger
     [_doneButton setImage:[UIImage imageNamed:@"Done"] forState:UIControlStateNormal];
     _doneButton.frame = CGRectMake(windowBounds.size.width - (51.0f + 9.0f),15.0f, 51.0f, 26.0f);
+    
+    _shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_shareButton setImageEdgeInsets:UIEdgeInsetsMake(-10, -10, -10, -10)];  // make click area bigger
+    [_shareButton setImage:[UIImage imageNamed:@"send"] forState:UIControlStateNormal];
+    _shareButton.frame = CGRectMake(windowBounds.size.width - 40.0f, windowBounds.size.height - 41.0f, 20.0f, 28.0f);
 }
 
 #pragma mark - Show
