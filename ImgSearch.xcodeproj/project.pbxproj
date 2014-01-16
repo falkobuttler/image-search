@@ -24,10 +24,13 @@
 		B1CFD2981832F32E00B41D63 /* ImgSearchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CFD2971832F32E00B41D63 /* ImgSearchTests.m */; };
 		CC13EE181887A44B004A670E /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE171887A44B004A670E /* ImageCell.m */; };
 		CC13EE1C1887A450004A670E /* UIImage+Decompression.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE1B1887A450004A670E /* UIImage+Decompression.m */; };
-		CC13EE2C1887B3DF004A670E /* MNMBottomPullToRefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE291887B3DF004A670E /* MNMBottomPullToRefreshManager.m */; };
-		CC13EE2D1887B3DF004A670E /* MNMBottomPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE2B1887B3DF004A670E /* MNMBottomPullToRefreshView.m */; };
 		CC13EE311887B59E004A670E /* img_pullrefresh_arrowup.png in Resources */ = {isa = PBXBuildFile; fileRef = CC13EE2F1887B59E004A670E /* img_pullrefresh_arrowup.png */; };
 		CC13EE321887B59E004A670E /* img_pullrefresh_arrowup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC13EE301887B59E004A670E /* img_pullrefresh_arrowup@2x.png */; };
+		CC13EE3F1887C45E004A670E /* MHFacebookImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE361887C45E004A670E /* MHFacebookImageViewer.m */; };
+		CC13EE401887C45E004A670E /* Done.png in Resources */ = {isa = PBXBuildFile; fileRef = CC13EE381887C45E004A670E /* Done.png */; };
+		CC13EE411887C45E004A670E /* Done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC13EE391887C45E004A670E /* Done@2x.png */; };
+		CC13EE421887C45E004A670E /* MNMBottomPullToRefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE3C1887C45E004A670E /* MNMBottomPullToRefreshManager.m */; };
+		CC13EE431887C45E004A670E /* MNMBottomPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE3E1887C45E004A670E /* MNMBottomPullToRefreshView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,12 +69,16 @@
 		CC13EE171887A44B004A670E /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		CC13EE1A1887A450004A670E /* UIImage+Decompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Decompression.h"; sourceTree = "<group>"; };
 		CC13EE1B1887A450004A670E /* UIImage+Decompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Decompression.m"; sourceTree = "<group>"; };
-		CC13EE281887B3DF004A670E /* MNMBottomPullToRefreshManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMBottomPullToRefreshManager.h; sourceTree = "<group>"; };
-		CC13EE291887B3DF004A670E /* MNMBottomPullToRefreshManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMBottomPullToRefreshManager.m; sourceTree = "<group>"; };
-		CC13EE2A1887B3DF004A670E /* MNMBottomPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMBottomPullToRefreshView.h; sourceTree = "<group>"; };
-		CC13EE2B1887B3DF004A670E /* MNMBottomPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMBottomPullToRefreshView.m; sourceTree = "<group>"; };
 		CC13EE2F1887B59E004A670E /* img_pullrefresh_arrowup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_pullrefresh_arrowup.png; sourceTree = "<group>"; };
 		CC13EE301887B59E004A670E /* img_pullrefresh_arrowup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_pullrefresh_arrowup@2x.png"; sourceTree = "<group>"; };
+		CC13EE351887C45E004A670E /* MHFacebookImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHFacebookImageViewer.h; sourceTree = "<group>"; };
+		CC13EE361887C45E004A670E /* MHFacebookImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFacebookImageViewer.m; sourceTree = "<group>"; };
+		CC13EE381887C45E004A670E /* Done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Done.png; sourceTree = "<group>"; };
+		CC13EE391887C45E004A670E /* Done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Done@2x.png"; sourceTree = "<group>"; };
+		CC13EE3B1887C45E004A670E /* MNMBottomPullToRefreshManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMBottomPullToRefreshManager.h; sourceTree = "<group>"; };
+		CC13EE3C1887C45E004A670E /* MNMBottomPullToRefreshManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMBottomPullToRefreshManager.m; sourceTree = "<group>"; };
+		CC13EE3D1887C45E004A670E /* MNMBottomPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMBottomPullToRefreshView.h; sourceTree = "<group>"; };
+		CC13EE3E1887C45E004A670E /* MNMBottomPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMBottomPullToRefreshView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				CC13EE2E1887B59E004A670E /* assets */,
-				CC13EE271887B3DF004A670E /* MNMBottomPullToRefreshView */,
 				CC13EE191887A450004A670E /* Categories */,
 				B1CFD27B1832F32E00B41D63 /* AppDelegate.h */,
 				B1CFD27C1832F32E00B41D63 /* AppDelegate.m */,
@@ -146,6 +152,7 @@
 				B1CFD2731832F32E00B41D63 /* Supporting Files */,
 				B1CFD2811832F32E00B41D63 /* ViewController.h */,
 				B1CFD2821832F32E00B41D63 /* ViewController.m */,
+				CC13EE331887C45E004A670E /* vendors */,
 			);
 			path = ImgSearch;
 			sourceTree = "<group>";
@@ -188,18 +195,6 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		CC13EE271887B3DF004A670E /* MNMBottomPullToRefreshView */ = {
-			isa = PBXGroup;
-			children = (
-				CC13EE281887B3DF004A670E /* MNMBottomPullToRefreshManager.h */,
-				CC13EE291887B3DF004A670E /* MNMBottomPullToRefreshManager.m */,
-				CC13EE2A1887B3DF004A670E /* MNMBottomPullToRefreshView.h */,
-				CC13EE2B1887B3DF004A670E /* MNMBottomPullToRefreshView.m */,
-			);
-			name = MNMBottomPullToRefreshView;
-			path = vendors/MNMBottomPullToRefreshView;
-			sourceTree = "<group>";
-		};
 		CC13EE2E1887B59E004A670E /* assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +202,45 @@
 				CC13EE301887B59E004A670E /* img_pullrefresh_arrowup@2x.png */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		CC13EE331887C45E004A670E /* vendors */ = {
+			isa = PBXGroup;
+			children = (
+				CC13EE341887C45E004A670E /* MHFBImageViewController */,
+				CC13EE3A1887C45E004A670E /* MNMBottomPullToRefreshView */,
+			);
+			path = vendors;
+			sourceTree = "<group>";
+		};
+		CC13EE341887C45E004A670E /* MHFBImageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC13EE351887C45E004A670E /* MHFacebookImageViewer.h */,
+				CC13EE361887C45E004A670E /* MHFacebookImageViewer.m */,
+				CC13EE371887C45E004A670E /* Resources */,
+			);
+			path = MHFBImageViewController;
+			sourceTree = "<group>";
+		};
+		CC13EE371887C45E004A670E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CC13EE381887C45E004A670E /* Done.png */,
+				CC13EE391887C45E004A670E /* Done@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CC13EE3A1887C45E004A670E /* MNMBottomPullToRefreshView */ = {
+			isa = PBXGroup;
+			children = (
+				CC13EE3B1887C45E004A670E /* MNMBottomPullToRefreshManager.h */,
+				CC13EE3C1887C45E004A670E /* MNMBottomPullToRefreshManager.m */,
+				CC13EE3D1887C45E004A670E /* MNMBottomPullToRefreshView.h */,
+				CC13EE3E1887C45E004A670E /* MNMBottomPullToRefreshView.m */,
+			);
+			path = MNMBottomPullToRefreshView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,7 +323,9 @@
 			files = (
 				B1CFD2851832F32E00B41D63 /* Images.xcassets in Resources */,
 				CC13EE311887B59E004A670E /* img_pullrefresh_arrowup.png in Resources */,
+				CC13EE411887C45E004A670E /* Done@2x.png in Resources */,
 				B1CFD2771832F32E00B41D63 /* InfoPlist.strings in Resources */,
+				CC13EE401887C45E004A670E /* Done.png in Resources */,
 				CC13EE321887B59E004A670E /* img_pullrefresh_arrowup@2x.png in Resources */,
 				B1CFD2801832F32E00B41D63 /* Main.storyboard in Resources */,
 			);
@@ -344,11 +380,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1CFD2831832F32E00B41D63 /* ViewController.m in Sources */,
-				CC13EE2C1887B3DF004A670E /* MNMBottomPullToRefreshManager.m in Sources */,
-				CC13EE2D1887B3DF004A670E /* MNMBottomPullToRefreshView.m in Sources */,
+				CC13EE421887C45E004A670E /* MNMBottomPullToRefreshManager.m in Sources */,
+				CC13EE431887C45E004A670E /* MNMBottomPullToRefreshView.m in Sources */,
 				CC13EE181887A44B004A670E /* ImageCell.m in Sources */,
 				CC13EE1C1887A450004A670E /* UIImage+Decompression.m in Sources */,
 				B1CFD27D1832F32E00B41D63 /* AppDelegate.m in Sources */,
+				CC13EE3F1887C45E004A670E /* MHFacebookImageViewer.m in Sources */,
 				B1CFD2791832F32E00B41D63 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

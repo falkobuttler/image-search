@@ -7,12 +7,14 @@
 //
 
 #import "ImageCell.h"
-#import "ViewController.h"
+#import "MHFacebookImageViewer.h"
 #import "MNMBottomPullToRefreshManager.h"
 #import "UIImage+Decompression.h"
+#import "ViewController.h"
 #import <NHBalancedFlowLayout/NHBalancedFlowLayout.h>
 
-@interface ViewController () <UICollectionViewDelegateFlowLayout, NHBalancedFlowLayoutDelegate, MNMBottomPullToRefreshManagerClient>
+@interface ViewController () <UICollectionViewDelegateFlowLayout, NHBalancedFlowLayoutDelegate,
+MNMBottomPullToRefreshManagerClient, MHFacebookImageViewerDatasource>
 
 @property (weak, nonatomic) IBOutlet UITextField *searchTermTextField;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
@@ -182,6 +184,10 @@ preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
     ImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     cell.imageView.image = nil;
     
+    [cell.imageView setupImageViewerWithDatasource:self initialIndex:indexPath.row onOpen:^{
+    } onClose:^{
+    }];
+    
     // Decompress image on background thread before displaying it to prevent lag
     NSInteger rowIndex = indexPath.row;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -202,12 +208,23 @@ preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
 #pragma mark -
 #pragma mark - UICollectionView delegate
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self, _images[indexPath.item]]
-                                                                                         applicationActivities:nil];
-    activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint];
-    [self presentViewController:activityViewController animated:YES completion:^{}];
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self, _images[indexPath.item]]
+//                                                                                         applicationActivities:nil];
+//    activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint];
+//    [self presentViewController:activityViewController animated:YES completion:^{}];
+//}
+
+#pragma mark -
+#pragma mark MHFacebookImageViewerDatasource
+
+- (NSInteger) numberImagesForImageViewer:(MHFacebookImageViewer *)imageViewer {
+    return _images.count;
+}
+
+- (UIImage*) imageDefaultAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer{
+    return _images[index];
 }
 
 #pragma mark -
