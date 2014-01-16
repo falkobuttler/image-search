@@ -22,6 +22,8 @@
 		B1CFD28E1832F32E00B41D63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1CFD2701832F32E00B41D63 /* UIKit.framework */; };
 		B1CFD2961832F32E00B41D63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B1CFD2941832F32E00B41D63 /* InfoPlist.strings */; };
 		B1CFD2981832F32E00B41D63 /* ImgSearchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CFD2971832F32E00B41D63 /* ImgSearchTests.m */; };
+		CC13EE181887A44B004A670E /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE171887A44B004A670E /* ImageCell.m */; };
+		CC13EE1C1887A450004A670E /* UIImage+Decompression.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE1B1887A450004A670E /* UIImage+Decompression.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,10 @@
 		B1CFD2931832F32E00B41D63 /* ImgSearchTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImgSearchTests-Info.plist"; sourceTree = "<group>"; };
 		B1CFD2951832F32E00B41D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B1CFD2971832F32E00B41D63 /* ImgSearchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImgSearchTests.m; sourceTree = "<group>"; };
+		CC13EE161887A44B004A670E /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
+		CC13EE171887A44B004A670E /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
+		CC13EE1A1887A450004A670E /* UIImage+Decompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Decompression.h"; sourceTree = "<group>"; };
+		CC13EE1B1887A450004A670E /* UIImage+Decompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Decompression.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,13 +124,16 @@
 		B1CFD2721832F32E00B41D63 /* ImgSearch */ = {
 			isa = PBXGroup;
 			children = (
+				CC13EE191887A450004A670E /* Categories */,
 				B1CFD27B1832F32E00B41D63 /* AppDelegate.h */,
 				B1CFD27C1832F32E00B41D63 /* AppDelegate.m */,
+				CC13EE161887A44B004A670E /* ImageCell.h */,
+				CC13EE171887A44B004A670E /* ImageCell.m */,
+				B1CFD2841832F32E00B41D63 /* Images.xcassets */,
 				B1CFD27E1832F32E00B41D63 /* Main.storyboard */,
+				B1CFD2731832F32E00B41D63 /* Supporting Files */,
 				B1CFD2811832F32E00B41D63 /* ViewController.h */,
 				B1CFD2821832F32E00B41D63 /* ViewController.m */,
-				B1CFD2841832F32E00B41D63 /* Images.xcassets */,
-				B1CFD2731832F32E00B41D63 /* Supporting Files */,
 			);
 			path = ImgSearch;
 			sourceTree = "<group>";
@@ -156,6 +165,15 @@
 				B1CFD2941832F32E00B41D63 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CC13EE191887A450004A670E /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				CC13EE1A1887A450004A670E /* UIImage+Decompression.h */,
+				CC13EE1B1887A450004A670E /* UIImage+Decompression.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +309,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1CFD2831832F32E00B41D63 /* ViewController.m in Sources */,
+				CC13EE181887A44B004A670E /* ImageCell.m in Sources */,
+				CC13EE1C1887A450004A670E /* UIImage+Decompression.m in Sources */,
 				B1CFD27D1832F32E00B41D63 /* AppDelegate.m in Sources */,
 				B1CFD2791832F32E00B41D63 /* main.m in Sources */,
 			);
