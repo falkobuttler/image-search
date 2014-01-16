@@ -109,6 +109,8 @@
                  }
              }
          }
+         // Count 1 since operation will be removed after this block
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = (_queue.operationCount != 1);
      }];
 }
 
@@ -134,16 +136,16 @@
                          else {
                              [_collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:_images.count-1 inSection:0]]];
                          }
-                         if ( _results.count == _images.count ) {
-                             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                         }
                      }];
                  }
              });
          }
+         // Count 1 since operation will be removed after this block
+         [UIApplication sharedApplication].networkActivityIndicatorVisible = (_queue.operationCount != 1);
      }];
 }
 
+#pragma mark -
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -152,6 +154,7 @@
     return YES;
 }
 
+#pragma mark -
 #pragma mark - UICollectionViewFlowLayoutDelegate
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
@@ -161,6 +164,7 @@ preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
     return [_images[indexPath.item] size];
 }
 
+#pragma mark -
 #pragma mark - UICollectionView data source
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -178,9 +182,7 @@ preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
     ImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     cell.imageView.image = nil;
     
-    /**
-     * Decompress image on background thread before displaying it to prevent lag
-     */
+    // Decompress image on background thread before displaying it to prevent lag
     NSInteger rowIndex = indexPath.row;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -198,6 +200,17 @@ preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
 }
 
 #pragma mark -
+#pragma mark - UICollectionView delegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self, _images[indexPath.item]]
+                                                                                         applicationActivities:nil];
+    activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint];
+    [self presentViewController:activityViewController animated:YES completion:^{}];
+}
+
+#pragma mark -
 #pragma mark MNMBottomPullToRefreshManagerClient
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -209,7 +222,6 @@ preferredSizeForItemAtIndexPath:(NSIndexPath *)indexPath
 }
 
 - (void)bottomPullToRefreshTriggered:(MNMBottomPullToRefreshManager *)manager {
-    
 }
 
 - (void)MNMBottomPullToRefreshManagerClientReloadCollectionView{
