@@ -17,8 +17,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchTermTextField;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) NSDictionary *results;
+@property (strong, nonatomic) NSMutableArray *results;
 @property (strong, nonatomic) NSMutableArray *images;
+@property (strong, nonatomic) NSNumber* nextStartIndex;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -27,6 +29,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _refreshControl = [[UIRefreshControl alloc] init];
+    _refreshControl.tintColor = [UIColor colorWithRed:0.000 green:0.000 blue:0.584 alpha:1.000];
+    [_refreshControl addTarget:self action:@selector(loadNextPage:) forControlEvents:UIControlEventValueChanged];
+    [_collectionView addSubview:_refreshControl];
+    _collectionView.alwaysBounceVertical = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,48 +43,72 @@
 }
 
 - (IBAction)didSearch:(UIButton *)sender {
+    _refreshControl.enabled = YES;
     _images = [NSMutableArray array];
     [_collectionView reloadData];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 //    [SVProgressHUD showWithStatus:@"Searching..." maskType:SVProgressHUDMaskTypeBlack];
     _errorLabel.text = @""; // clear any previous errors
     [_searchTermTextField resignFirstResponder]; // hide keyboard
-    
+
+    [self loadPageFromIndex:@0];
+}
+
+- (void)loadNextPage:(id)sender
+{
+    [_refreshControl endRefreshing];
+    [self loadPageFromIndex:_nextStartIndex];
+}
+
+- (void)loadPageFromIndex:(NSNumber *)startIndex
+{
     // https://developers.google.com/image-search/v1/jsondevguide#basic_query
     // Return 8 images per page (maximum per Google)
     NSString* encodedSearchText = [_searchTermTextField.text
                                    stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    NSString *queryString = [NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&q=%@",
-                             encodedSearchText];
+    NSString *queryString = [NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&start=%@&q=%@",
+                             startIndex, encodedSearchText];
     
     //Make an asynchronous request for the data
     [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:queryString]]
                                        queue:[[NSOperationQueue alloc] init]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
-        if (error) {
-            _errorLabel.text = [NSString stringWithFormat:@"Error: %@", error.localizedDescription];
-        } else {
-            NSError *localError = nil;
-            NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
-            
-            if (localError != nil) {
-                _errorLabel.text = [NSString stringWithFormat:@"Error: Cannot parse result - %@",
-                                    error.localizedDescription];
-            }else{
-                _results = parsedObject[@"responseData"][@"results"];
-                if ( ![_results isKindOfClass:[NSArray class]] || _results.count == 0 ) {
-                    _errorLabel.text = @"No results";
-                }
-                else {
-                    for( NSDictionary* imageDict in _results ) {
-                        NSString *image = imageDict[@"url"];
-                        [self getImage:image];
-                    }
-                }
-            }
-        }
-    }];
+         if (error) {
+             _errorLabel.text = [NSString stringWithFormat:@"Error: %@", error.localizedDescription];
+         } else {
+             NSError *localError = nil;
+             NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
+             
+             if (localError != nil) {
+                 _errorLabel.text = [NSString stringWithFormat:@"Error: Cannot parse result - %@",
+                                     error.localizedDescription];
+             }else{
+                 //_nextStartIndex
+                 NSDictionary *responseData = parsedObject[@"responseData"];
+                 NSDictionary *cursor = responseData[@"cursor"];
+                 NSArray* pages = cursor[@"pages"];
+                 int currentPageIndex = [cursor[@"currentPageIndex"] intValue];
+                 if ( pages.count <= currentPageIndex+1 ) {
+                     // Reached end - API only allows to query up to 64 results (8 pages with 8 results each)
+                     _refreshControl.enabled = NO;
+                     return;
+                 }
+                 _nextStartIndex = pages[currentPageIndex+1][@"start"];
+                 _results = responseData[@"results"];
+                 if ( ![_results isKindOfClass:[NSArray class]] || _results.count == 0 ) {
+                     //                    _errorLabel.text = @"No results";
+                 }
+                 else {
+                     // Load all images for this page
+                     for( NSDictionary* imageDict in _results ) {
+                         NSString *image = imageDict[@"url"];
+                         [self getImage:image];
+                     }
+                 }
+             }
+         }
+     }];
 }
 
 -(void) getImage:(NSString *)url
@@ -91,11 +123,13 @@
              dispatch_async(dispatch_get_main_queue(), ^{
 //                 [SVProgressHUD dismiss];
                  UIImage *img = [[UIImage alloc] initWithData:data];
-                 @synchronized(self) { // Only one thread at a time
-                     [_images addObject:img];
-                     [_collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:_images.count-1 inSection:0]]];
-                     if ( _results.count == _images.count ) {
-                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                 if ( img ) {
+                     @synchronized(self) { // Only one thread at a time
+                         [_images addObject:img];
+                         [_collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:_images.count-1 inSection:0]]];
+                         if ( _results.count == _images.count ) {
+                             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                         }
                      }
                  }
              });
