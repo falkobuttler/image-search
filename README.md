@@ -13,3 +13,9 @@ Requires CocoaPods to install dependencies. Go to the project and install depend
 * Pagination with pull to load more
 * Fullscreen image view with swipe and zoom gestures
 * Share/Export image
+* Refine Results 
+** File Types
+** Colors
+** Rights
+** Sizes
+** Image Types

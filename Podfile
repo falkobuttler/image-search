@@ -1,2 +1,3 @@
-platform :ios, '7.0'
+platform :ios, '6.0'
 pod 'NHBalancedFlowLayout'
+pod 'RNBlurModalView', '~> 0.1.0'

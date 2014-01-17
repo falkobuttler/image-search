@@ -22,6 +22,14 @@
 		B1CFD28E1832F32E00B41D63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1CFD2701832F32E00B41D63 /* UIKit.framework */; };
 		B1CFD2961832F32E00B41D63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B1CFD2941832F32E00B41D63 /* InfoPlist.strings */; };
 		B1CFD2981832F32E00B41D63 /* ImgSearchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CFD2971832F32E00B41D63 /* ImgSearchTests.m */; };
+		CC00A9921888ED6600F6367A /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC00A98F1888ED6600F6367A /* done@2x.png */; };
+		CC00A9981888ED8600F6367A /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = CC00A9951888ED8600F6367A /* done.png */; };
+		CC00A99F1888ED9000F6367A /* DropDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC00A99C1888ED9000F6367A /* DropDownListView.m */; };
+		CC00A9A01888ED9000F6367A /* DropDownViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC00A99E1888ED9000F6367A /* DropDownViewCell.m */; };
+		CC00A9A31888EEDD00F6367A /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC00A9A21888EEDD00F6367A /* FilterViewController.m */; };
+		CC00A9A61888F37D00F6367A /* SearchConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = CC00A9A51888F37D00F6367A /* SearchConfiguration.m */; };
+		CC00A9A91888F7AF00F6367A /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = CC00A9A71888F7AF00F6367A /* filter.png */; };
+		CC00A9AA1888F7AF00F6367A /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC00A9A81888F7AF00F6367A /* filter@2x.png */; };
 		CC13EE181887A44B004A670E /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE171887A44B004A670E /* ImageCell.m */; };
 		CC13EE1C1887A450004A670E /* UIImage+Decompression.m in Sources */ = {isa = PBXBuildFile; fileRef = CC13EE1B1887A450004A670E /* UIImage+Decompression.m */; };
 		CC13EE311887B59E004A670E /* img_pullrefresh_arrowup.png in Resources */ = {isa = PBXBuildFile; fileRef = CC13EE2F1887B59E004A670E /* img_pullrefresh_arrowup.png */; };
@@ -67,6 +75,18 @@
 		B1CFD2931832F32E00B41D63 /* ImgSearchTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImgSearchTests-Info.plist"; sourceTree = "<group>"; };
 		B1CFD2951832F32E00B41D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B1CFD2971832F32E00B41D63 /* ImgSearchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImgSearchTests.m; sourceTree = "<group>"; };
+		CC00A98F1888ED6600F6367A /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done@2x.png"; sourceTree = "<group>"; };
+		CC00A9951888ED8600F6367A /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
+		CC00A99B1888ED9000F6367A /* DropDownListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownListView.h; sourceTree = "<group>"; };
+		CC00A99C1888ED9000F6367A /* DropDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownListView.m; sourceTree = "<group>"; };
+		CC00A99D1888ED9000F6367A /* DropDownViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownViewCell.h; sourceTree = "<group>"; };
+		CC00A99E1888ED9000F6367A /* DropDownViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownViewCell.m; sourceTree = "<group>"; };
+		CC00A9A11888EEDD00F6367A /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		CC00A9A21888EEDD00F6367A /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		CC00A9A41888F37D00F6367A /* SearchConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchConfiguration.h; sourceTree = "<group>"; };
+		CC00A9A51888F37D00F6367A /* SearchConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchConfiguration.m; sourceTree = "<group>"; };
+		CC00A9A71888F7AF00F6367A /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
+		CC00A9A81888F7AF00F6367A /* filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter@2x.png"; sourceTree = "<group>"; };
 		CC13EE161887A44B004A670E /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		CC13EE171887A44B004A670E /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		CC13EE1A1887A450004A670E /* UIImage+Decompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Decompression.h"; sourceTree = "<group>"; };
@@ -149,10 +169,14 @@
 				CC13EE191887A450004A670E /* Categories */,
 				B1CFD27B1832F32E00B41D63 /* AppDelegate.h */,
 				B1CFD27C1832F32E00B41D63 /* AppDelegate.m */,
+				CC00A9A11888EEDD00F6367A /* FilterViewController.h */,
+				CC00A9A21888EEDD00F6367A /* FilterViewController.m */,
 				CC13EE161887A44B004A670E /* ImageCell.h */,
 				CC13EE171887A44B004A670E /* ImageCell.m */,
 				B1CFD2841832F32E00B41D63 /* Images.xcassets */,
 				B1CFD27E1832F32E00B41D63 /* Main.storyboard */,
+				CC00A9A41888F37D00F6367A /* SearchConfiguration.h */,
+				CC00A9A51888F37D00F6367A /* SearchConfiguration.m */,
 				B1CFD2731832F32E00B41D63 /* Supporting Files */,
 				B1CFD2811832F32E00B41D63 /* ViewController.h */,
 				B1CFD2821832F32E00B41D63 /* ViewController.m */,
@@ -190,6 +214,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CC00A99A1888ED9000F6367A /* kDropDown */ = {
+			isa = PBXGroup;
+			children = (
+				CC00A99B1888ED9000F6367A /* DropDownListView.h */,
+				CC00A99C1888ED9000F6367A /* DropDownListView.m */,
+				CC00A99D1888ED9000F6367A /* DropDownViewCell.h */,
+				CC00A99E1888ED9000F6367A /* DropDownViewCell.m */,
+			);
+			path = kDropDown;
+			sourceTree = "<group>";
+		};
 		CC13EE191887A450004A670E /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,10 +237,14 @@
 		CC13EE2E1887B59E004A670E /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				CC13EE441887CA2F004A670E /* send.png */,
-				CC13EE451887CA2F004A670E /* send@2x.png */,
+				CC00A9951888ED8600F6367A /* done.png */,
+				CC00A98F1888ED6600F6367A /* done@2x.png */,
+				CC00A9A71888F7AF00F6367A /* filter.png */,
+				CC00A9A81888F7AF00F6367A /* filter@2x.png */,
 				CC13EE2F1887B59E004A670E /* img_pullrefresh_arrowup.png */,
 				CC13EE301887B59E004A670E /* img_pullrefresh_arrowup@2x.png */,
+				CC13EE441887CA2F004A670E /* send.png */,
+				CC13EE451887CA2F004A670E /* send@2x.png */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -213,6 +252,7 @@
 		CC13EE331887C45E004A670E /* vendors */ = {
 			isa = PBXGroup;
 			children = (
+				CC00A99A1888ED9000F6367A /* kDropDown */,
 				CC13EE341887C45E004A670E /* MHFBImageViewController */,
 				CC13EE3A1887C45E004A670E /* MNMBottomPullToRefreshView */,
 			);
@@ -328,14 +368,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1CFD2851832F32E00B41D63 /* Images.xcassets in Resources */,
+				CC00A9A91888F7AF00F6367A /* filter.png in Resources */,
 				CC13EE311887B59E004A670E /* img_pullrefresh_arrowup.png in Resources */,
+				CC00A9981888ED8600F6367A /* done.png in Resources */,
 				CC13EE411887C45E004A670E /* Done@2x.png in Resources */,
+				CC00A9921888ED6600F6367A /* done@2x.png in Resources */,
 				CC13EE471887CA2F004A670E /* send@2x.png in Resources */,
 				B1CFD2771832F32E00B41D63 /* InfoPlist.strings in Resources */,
 				CC13EE401887C45E004A670E /* Done.png in Resources */,
 				CC13EE461887CA2F004A670E /* send.png in Resources */,
 				CC13EE321887B59E004A670E /* img_pullrefresh_arrowup@2x.png in Resources */,
 				B1CFD2801832F32E00B41D63 /* Main.storyboard in Resources */,
+				CC00A9AA1888F7AF00F6367A /* filter@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,12 +432,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1CFD2831832F32E00B41D63 /* ViewController.m in Sources */,
+				CC00A9A01888ED9000F6367A /* DropDownViewCell.m in Sources */,
 				CC13EE421887C45E004A670E /* MNMBottomPullToRefreshManager.m in Sources */,
+				CC00A9A31888EEDD00F6367A /* FilterViewController.m in Sources */,
 				CC13EE431887C45E004A670E /* MNMBottomPullToRefreshView.m in Sources */,
 				CC13EE181887A44B004A670E /* ImageCell.m in Sources */,
 				CC13EE1C1887A450004A670E /* UIImage+Decompression.m in Sources */,
 				B1CFD27D1832F32E00B41D63 /* AppDelegate.m in Sources */,
+				CC00A99F1888ED9000F6367A /* DropDownListView.m in Sources */,
 				CC13EE3F1887C45E004A670E /* MHFacebookImageViewer.m in Sources */,
+				CC00A9A61888F37D00F6367A /* SearchConfiguration.m in Sources */,
 				B1CFD2791832F32E00B41D63 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,6 +573,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImgSearch/ImgSearch-Prefix.pch";
 				INFOPLIST_FILE = "ImgSearch/ImgSearch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -539,6 +588,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImgSearch/ImgSearch-Prefix.pch";
 				INFOPLIST_FILE = "ImgSearch/ImgSearch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
